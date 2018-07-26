@@ -3,9 +3,11 @@ package br.ufal.ic.lexic;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class Lexic {
-    private Token token;
+    private Token previousToken;
+    private Token currentToken;
     private String currentLineContent;
     private int currentLine, currentColumn;
     private BufferedReader buffer;
@@ -15,36 +17,21 @@ public class Lexic {
         this.buffer = new BufferedReader(new FileReader(filepath));
     }
 
-    private boolean setNextLine() {
+    public boolean hasNextToken() {
         String line = null;
-
         try {
-            line = buffer.readLine();
-        } catch(Exception e) {
+            do {
+                line = buffer.readLine();
+                currentLine++;
+                currentColumn = 0;
+            } while (line != null && line.matches("[^\\s]\\n?"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         if (line != null) {
             currentLineContent = line;
             return true;
-        }
-        return false;
-    }
-
-    public boolean hasNextToken() {
-//        if (this.currentLine == 0 && this.currentColumn == 0) { // file not red yet
-//            if (!setNextLine()) { // file is empty
-//                return false; // there is no more tokens (the file is empty)
-//            }
-//        }
-
-        while (setNextLine()) { // iterates until reaches the end of the file
-            currentLine++;
-            currentColumn = 0;
-
-            if (!currentLineContent.matches("[^ \t]")) {
-                return true;
-            }
         }
         return false;
     }
@@ -58,9 +45,77 @@ public class Lexic {
         Token token;
         int tLine = currentLine;
         int tColumn = currentColumn;
-        String tValue = "";
+        StringBuilder tValue = new StringBuilder();
 
+        if (Character.toString(c).matches("\\d")) {
+            boolean floatDetected = false;
+            while (Character.toString(c).matches("\\d") || (!floatDetected && c == '.')) {
+                if (c == '.') {
+                    floatDetected = true;
+                }
 
+                tValue.append(c);
+                c = nextChar();
+            }
+        } else {
+            while (!LexicalTable.tokenEndings.contains(c)) {
+                tValue.append(c);
+                c = nextChar();
+            }
+        }
+
+        if (tValue.length() == 0) {
+            if (c == '"') { // begin of a string
+                tValue.append(c);
+                c = nextChar();
+                while (c != '"') { // reads until finds "
+                    tValue.append(c);
+                    c = nextChar();
+                }
+                tValue.append(c);
+                currentColumn++;
+            } else if (c == '\'') {
+                tValue.append(c);
+                c = nextChar();
+                if (c == '\\') {
+                    c = nextChar();
+                }
+                tValue.append(c);
+                c = nextChar();
+                if (c == '\'') {
+                    tValue.append(c);
+                    currentColumn++;
+                }
+            } else if (c == '<' || c == '=' || c == '>') {
+                tValue.append(c);
+                c = nextChar();
+                if (c == '=') {
+                    tValue.append(c);
+                    currentColumn++;
+                }
+            } else if (c == '&') {
+                tValue.append(c);
+                c = nextChar();
+                if (c == '&') {
+                    tValue.append(c);
+                    currentColumn++;
+                }
+            } else if (c == '|') {
+                tValue.append(c);
+                c = nextChar();
+                if (c == '|') {
+                    tValue.append(c);
+                    currentColumn++;
+                }
+            } else {
+                tValue.append(c);
+                currentColumn++;
+            }
+        }
+        String value = tValue.toString().trim();
+        token = new Token(value, tLine, tColumn, findTokenCategory(value));
+        previousToken = currentToken;
+        currentToken = token;
         return token;
     }
 
@@ -70,5 +125,18 @@ public class Lexic {
             return currentLineContent.charAt(currentColumn);
         }
         return '\n';
+    }
+
+    private TokenCategory findTokenCategory(String value) {
+        if(value.equals("-") && isUnaryNegative()){
+            return TokenCategory.opUnMinus;
+        } else if(LexicalTable.keywords.containsKey(value)) {
+            return LexicalTable.keywords.get(value);
+        } else if(LexicalTable.separators.containsKey(value)) {
+            return LexicalTable.separators.get(value);
+        } else if(LexicalTable.operators.containsKey(value)) {
+            return LexicalTable.operators.get(value);
+        }
+        return consOrId(value);
     }
 }
