@@ -1,5 +1,7 @@
 package br.ufal.ic.lexic;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,27 +15,32 @@ public class Lexic {
     private BufferedReader buffer;
 
     public Lexic(String filepath) throws FileNotFoundException {
-        this.currentLine = currentColumn = -1;
+        this.currentLine = -1;
+        this.currentColumn = 0;
         this.buffer = new BufferedReader(new FileReader(filepath));
     }
 
     public boolean hasNextToken() {
-        String line = null;
+        String line = currentLineContent != null ? currentLineContent.substring(currentColumn) : null;
+//        if (line != null) System.out.print("> " + line);
         try {
-            do {
+            while (line == null || !line.matches("[\\s]*[^\\s].*")) {
                 line = buffer.readLine();
                 currentLine++;
+//                System.out.print(" (++) ");
                 currentColumn = 0;
-            } while (line != null && line.matches("[^\\s]\\n?"));
+
+                if (line == null) {
+//                    System.out.println(" FALSE");
+                    return false;
+                }
+                currentLineContent = line;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        if (line != null) {
-            currentLineContent = line;
-            return true;
-        }
-        return false;
+//        System.out.println(" TRUE");
+        return true;
     }
 
     public Token nextToken() {
@@ -58,10 +65,12 @@ public class Lexic {
                 c = nextChar();
             }
         } else {
+//            System.out.print(c);
             while (!LexicalTable.tokenEndings.contains(c)) {
                 tValue.append(c);
                 c = nextChar();
             }
+//            System.out.println(" -->" + tValue + " (" + currentLine + ", " + currentColumn + ")");
         }
 
         if (tValue.length() == 0) {
@@ -128,14 +137,16 @@ public class Lexic {
     }
 
     private TokenCategory findTokenCategory(String value) {
-        if(value.equals("-") && isUnaryNegative()){
+        if (value.equals("-") && isUnaryNegative()) {
             return TokenCategory.opUnMinus;
-        } else if(LexicalTable.keywords.containsKey(value)) {
+        } else if (LexicalTable.keywords.containsKey(value)) {
             return LexicalTable.keywords.get(value);
-        } else if(LexicalTable.separators.containsKey(value)) {
+        } else if (LexicalTable.separators.containsKey(value)) {
             return LexicalTable.separators.get(value);
-        } else if(LexicalTable.operators.containsKey(value)) {
+        } else if (LexicalTable.operators.containsKey(value)) {
             return LexicalTable.operators.get(value);
+        } else if (LexicalTable.delimiters.containsKey(value)) {
+            return LexicalTable.delimiters.get(value);
         }
         return consOrId(value);
     }

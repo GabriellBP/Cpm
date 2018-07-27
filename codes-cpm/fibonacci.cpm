@@ -1,0 +1,26 @@
+fibonacci(n: int): void {
+	a: int = 0, b: int = 1, i: int = 0;
+	limit: bool = n >= 0;
+
+	while(limit) {
+		if (i > 0) {
+			print(", ");
+		}
+
+		if (i <= 1) {
+			print("%i", i);
+		} else {
+			print("%i", a + b);
+			b = a + b;
+			a = b - a;
+		}
+		i = i + 1;
+		limit = (a+b) <= n;
+	}
+}
+
+main(): void {
+	n: int;
+	read("%i", n);
+	fibonacci(n);
+}

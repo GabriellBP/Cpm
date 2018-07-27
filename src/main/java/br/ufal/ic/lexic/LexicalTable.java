@@ -81,6 +81,7 @@ public class LexicalTable {
         tokenEndings.add('}');
         tokenEndings.add('\'');
         tokenEndings.add('"');
+        tokenEndings.add(':');
     }
 
 //    NOT USED: id, consNumInt, consNumFlo, consBool, consChar, consString,
