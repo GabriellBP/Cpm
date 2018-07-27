@@ -140,6 +140,18 @@ public class Lexic {
         return consOrId(value);
     }
 
+    private boolean isUnaryNegative(){
+        if (previousToken != null) {
+            TokenCategory prevTokenCat = previousToken.getCategory();
+
+            if (prevTokenCat == TokenCategory.consNumInt || prevTokenCat == TokenCategory.consNumFlo) {
+                return false;
+            }
+            return prevTokenCat != TokenCategory.id && prevTokenCat != TokenCategory.paramEnd;
+        }
+        return true;
+    }
+
     private TokenCategory consOrId(String tokenValue) {
         if(tokenValue.matches("\\d+")) {
             return TokenCategory.consNumInt;
