@@ -139,4 +139,22 @@ public class Lexic {
         }
         return consOrId(value);
     }
+
+    private TokenCategory consOrId(String tokenValue) {
+        if(tokenValue.matches("\\d+")) {
+            return TokenCategory.consNumInt;
+        } else if(tokenValue.matches("(\\d)+\\.(\\d)+")) {
+            return TokenCategory.consNumFlo;
+        } else if(tokenValue.startsWith("\"") && tokenValue.length() > 1 && tokenValue.endsWith("\"")) {
+           return TokenCategory.consString;
+        } else if(tokenValue.startsWith("\'") && tokenValue.length() == 1 && tokenValue.endsWith("\'")) {
+            return TokenCategory.consChar;
+        } else if(tokenValue.equals("true") || tokenValue.equals("false")) {
+            return TokenCategory.consBool;
+        } else if(tokenValue.matches("[a-z_A-Z](\\w)*")) {
+            return TokenCategory.id;
+        }
+
+        return TokenCategory.unknown;
+    }
 }

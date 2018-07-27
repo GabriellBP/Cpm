@@ -38,6 +38,7 @@ public enum TokenCategory {
     opUnMinus,
     opMult,
     opRel,
-    opEquals
+    opEquals,
+    unknown
 }
 
