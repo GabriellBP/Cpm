@@ -26,10 +26,9 @@ public class LexicalTable {
         keywords.put("while", TokenCategory.rwWhile);
         keywords.put("print", TokenCategory.rwPrint);
         keywords.put("read", TokenCategory.rwRead);
+        keywords.put("length", TokenCategory.rwLength);
         keywords.put("return", TokenCategory.rwReturn);
         keywords.put("void", TokenCategory.rwVoid);
-        keywords.put("+", TokenCategory.opConc);
-        keywords.put("-", TokenCategory.opUnMinus);
 
         delimiters.put(";", TokenCategory.lineEnd);
         delimiters.put("[", TokenCategory.arrayBeg);
@@ -40,16 +39,17 @@ public class LexicalTable {
         delimiters.put("}", TokenCategory.scopeEnd);
 
         separators.put(",", TokenCategory.commaSep);
+        separators.put(":", TokenCategory.colonSep);
 
         operators.put("!", TokenCategory.opNot);
         operators.put("=", TokenCategory.opAssign);
         operators.put("||", TokenCategory.opLogic);
         operators.put("&&", TokenCategory.opLogic);
-        operators.put("+", TokenCategory.opAditiv);
-        operators.put("-", TokenCategory.opAditiv);
+        operators.put("+", TokenCategory.opPlus);
+        operators.put("-", TokenCategory.opMinus);
         operators.put("*", TokenCategory.opMult);
         operators.put("/", TokenCategory.opMult);
-        operators.put("^", TokenCategory.opMult);
+        operators.put("^", TokenCategory.opExp);
         operators.put("==", TokenCategory.opEquals);
         operators.put("!=", TokenCategory.opEquals);
         operators.put(">", TokenCategory.opRel);

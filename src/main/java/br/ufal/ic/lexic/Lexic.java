@@ -1,15 +1,11 @@
 package br.ufal.ic.lexic;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Lexic {
-    private Token previousToken;
-    private Token currentToken;
     private String currentLineContent;
     private int currentLine, currentColumn;
     private BufferedReader buffer;
@@ -35,6 +31,7 @@ public class Lexic {
                     return false;
                 }
                 currentLineContent = line;
+                System.out.println(currentLineContent);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,8 +120,8 @@ public class Lexic {
         }
         String value = tValue.toString().trim();
         token = new Token(value, tLine, tColumn, findTokenCategory(value));
-        previousToken = currentToken;
-        currentToken = token;
+//        previousToken = currentToken;
+//        currentToken = token;
         return token;
     }
 
@@ -137,9 +134,7 @@ public class Lexic {
     }
 
     private TokenCategory findTokenCategory(String value) {
-        if (value.equals("-") && isUnaryNegative()) {
-            return TokenCategory.opUnMinus;
-        } else if (LexicalTable.keywords.containsKey(value)) {
+        if (LexicalTable.keywords.containsKey(value)) {
             return LexicalTable.keywords.get(value);
         } else if (LexicalTable.separators.containsKey(value)) {
             return LexicalTable.separators.get(value);
@@ -149,18 +144,6 @@ public class Lexic {
             return LexicalTable.delimiters.get(value);
         }
         return consOrId(value);
-    }
-
-    private boolean isUnaryNegative(){
-        if (previousToken != null) {
-            TokenCategory prevTokenCat = previousToken.getCategory();
-
-            if (prevTokenCat == TokenCategory.consNumInt || prevTokenCat == TokenCategory.consNumFlo) {
-                return false;
-            }
-            return prevTokenCat != TokenCategory.id && prevTokenCat != TokenCategory.paramEnd;
-        }
-        return true;
     }
 
     private TokenCategory consOrId(String tokenValue) {
@@ -174,7 +157,7 @@ public class Lexic {
             return TokenCategory.consChar;
         } else if(tokenValue.equals("true") || tokenValue.equals("false")) {
             return TokenCategory.consBool;
-        } else if(tokenValue.matches("[a-z_A-Z](\\w)*")) {
+        } else if(tokenValue.matches("[A-Za-z][A-Za-z0-9]*")) {
             return TokenCategory.id;
         }
 
