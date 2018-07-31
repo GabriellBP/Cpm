@@ -1,0 +1,37 @@
+shellSort(vet: int[]): int[] {
+   	i: int, j: int, value: int;
+	gap: int = 1;
+   	while(gap < length(vet)) {
+       	gap = 3*gap+1;
+   	}
+   	while(gap > 1) {
+       	gap = gap / 3;
+       	for(i = gap; length(vet) - 1) {
+           	value = vet[i];
+           	j = i;
+           	while(j >= gap && value < vet[j - gap]) {
+               		vet[j] = vet [j - gap];
+                		j = j - gap;
+            	}
+            	vet[j] = value;
+        	}
+   	}
+   	return vet;
+}
+
+main(): void {
+	i: int, aux: int;	
+	v: int[5];
+
+	for(i = 0; length(v)) {
+		read("%i", aux);
+		v[i] = aux;
+	}
+
+	v = shellSort(v);
+
+
+	for(i = 0; length(v)) {
+		print("%i ", v[i]);
+	}
+}
