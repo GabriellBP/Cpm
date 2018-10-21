@@ -1,4 +1,4 @@
-package br.ufal.ic.syntatic;
+package br.ufal.ic.syntactic.slr;
 
 public class Production {
     int size;

@@ -1,8 +1,9 @@
 package br.ufal.ic;
 
 import br.ufal.ic.lexic.Lexic;
-import br.ufal.ic.syntatic.Grammar;
-import br.ufal.ic.syntatic.Syntatic;
+import br.ufal.ic.syntactic.slr.SLRTableMaker;
+import br.ufal.ic.syntactic.slr.Grammar;
+import br.ufal.ic.syntactic.Syntactic;
 
 import java.io.FileNotFoundException;
 
@@ -12,8 +13,11 @@ public class Main {
             Lexic lexic = new Lexic(args[0]);
 
             Grammar grammar = new Grammar(args[1]);
-            Syntatic syntatic = new Syntatic(lexic, grammar);
-            syntatic.analyze();
+            SLRTableMaker slrTableAction = new SLRTableMaker(args[2]);
+            SLRTableMaker slrTableTransition = new SLRTableMaker(args[3]);
+            Syntactic syntactic = new Syntactic(lexic, grammar, slrTableAction, slrTableTransition);
+            syntactic.analyze();
+
         } catch (FileNotFoundException e) {
             System.err.println("File not found");
         } catch (Exception e) {

@@ -1,12 +1,14 @@
-package br.ufal.ic.syntatic;
+package br.ufal.ic.syntactic;
 
 import br.ufal.ic.lexic.Lexic;
+import br.ufal.ic.syntactic.slr.Grammar;
+import br.ufal.ic.syntactic.slr.SLRTableMaker;
 
-public class Syntatic {
+public class Syntactic {
     private Lexic lexic;
     private Grammar grammar;
 
-    public Syntatic(Lexic lexic, Grammar grammar) {
+    public Syntactic(Lexic lexic, Grammar grammar, SLRTableMaker slrTableAction, SLRTableMaker slrTableTransition) {
         this.lexic = lexic;
         this.grammar = grammar;
     }

@@ -1,4 +1,4 @@
-package br.ufal.ic.syntatic;
+package br.ufal.ic.syntactic.slr;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
