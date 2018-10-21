@@ -3,13 +3,13 @@ package br.ufal.ic.syntactic.slr;
 import java.io.*;
 import java.util.*;
 
-public class SLRTableMaker {
+public class SLRTable {
     private Map<String, Integer> tableHeader;
     private String[][] tableContent;
     private int tableContentNumLines;
     private int tableContentNumColumns;
 
-    public SLRTableMaker(String path) {
+    public SLRTable(String path) {
         try {
             File csvFile = new File(path);
             long archiveSize = csvFile.length();
@@ -27,7 +27,7 @@ public class SLRTableMaker {
 
             line = buffer.readLine();
             for (String column : line.split(";")) {
-                this.tableHeader.put(column, lineCounter);
+                this.tableHeader.put(column.replace("'", ""), lineCounter);
                 lineCounter++;
             }
 
@@ -44,7 +44,7 @@ public class SLRTableMaker {
                         tableContent[lineCounter][columnCounter] = element.length() == 0 ? null : element.toString();
                         element.setLength(0);
                         columnCounter++;
-                    } else {
+                    } else if (c != '\'') {
                         element.append(c);
                     }
                 }

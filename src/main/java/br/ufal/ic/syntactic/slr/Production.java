@@ -1,9 +1,9 @@
 package br.ufal.ic.syntactic.slr;
 
 public class Production {
-    int size;
-    String left;
-    String[] right;
+    private int size;
+    private String left;
+    private String[] right;
 
     Production(String prod) {
         String[] elements = prod.split("=");
@@ -20,5 +20,17 @@ public class Production {
         }
 
         return ret.toString();
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public String getLeft() {
+        return left;
+    }
+
+    public String[] getRight() {
+        return right;
     }
 }

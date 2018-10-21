@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Grammar {
-    private BufferedReader buffer;
-    ArrayList<Production> productions = new ArrayList<Production>();
+    private ArrayList<Production> productions = new ArrayList<Production>();
 
     public Grammar(String filepath) throws IOException {
-        this.buffer = new BufferedReader(new FileReader(filepath));
+        BufferedReader buffer = new BufferedReader(new FileReader(filepath));
 
         String line = buffer.readLine();
         while (line != null) {
@@ -20,5 +19,9 @@ public class Grammar {
             }
             line = buffer.readLine();
         }
+    }
+
+    public ArrayList<Production> getProductions() {
+        return productions;
     }
 }
