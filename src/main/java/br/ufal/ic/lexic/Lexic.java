@@ -31,7 +31,7 @@ public class Lexic {
                     return false;
                 }
                 currentLineContent = line;
-                System.out.println(currentLineContent);
+                System.out.printf("%4d  %s\n", currentLine + 1, currentLineContent);
             }
         } catch (IOException e) {
             e.printStackTrace();

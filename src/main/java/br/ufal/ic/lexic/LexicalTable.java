@@ -10,7 +10,7 @@ public class LexicalTable {
     public static Map<String, TokenCategory> delimiters = new HashMap<String, TokenCategory>();
     public static Map<String, TokenCategory> separators = new HashMap<String, TokenCategory>();
     public static Map<String, TokenCategory> operators = new HashMap<String, TokenCategory>();
-    public static List<Character> tokenEndings = new ArrayList<>();
+    public static List<Character> tokenEndings = new ArrayList();
 
     static {
         keywords.put("main", TokenCategory.main);

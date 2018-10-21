@@ -1,0 +1,123 @@
+S = Code
+
+Code = DeclVarG Code
+Code = DeclVarG
+Code = DeclFunc Code
+Code = DeclFunc
+
+DeclVarG = DeclVar
+
+DeclVar = 'id' RealType 'lineEnd'
+DeclVar = 'id' RealType 'commaSep' DeclVar
+DeclVar = 'id' RealType 'opAssign' Expression 'lineEnd'
+DeclVar = 'id' RealType 'opAssign' Expression 'commaSep' DeclVar
+
+RealType = 'opSpecType' TypeAtomic
+RealType = 'opSpecType' TypeArray
+
+TypeAtomic = 'tInt'
+TypeAtomic = 'tFloat'
+TypeAtomic = 'tBool'
+TypeAtomic = 'tChar'
+TypeAtomic = 'tString'
+
+TypeArray = TypeArray 'arrayBeg' 'consNumInt' 'arrayEnd'
+TypeArray = TypeAtomic 'arrayBeg' 'consNumInt' 'arrayEnd'
+
+Literal = 'consNumInt'
+Literal = 'consNumFlo'
+Literal = 'consBool'
+Literal = 'consChar'
+Literal = 'consString'
+Literal = LiteralArray
+
+LiteralArray = 'arraybeg' ExpressionList 'arrayEnd'
+
+Expression = ExpressionR
+Expression = 'opUnMinus' ExpressionR
+Expression = 'opNot' ExpressionR
+Expression = Expression OperatorsBinary ExpressionR
+
+ExpressionR = 'paramBeg' Expression 'paramEnd'
+ExpressionR = 'id'
+ExpressionR = 'id' MatrixIndex
+ExpressionR = 'id' FuncParamsReal
+ExpressionR = Literal
+
+ExpressionList = Expression
+ExpressionList = ExpressionList 'commaSep' Expression
+
+MatrixIndex = MatrixIndex 'arrayBeg' Expression 'arrayEnd'
+MatrixIndex = 'arrayBeg' Expression 'arrayEnd'
+
+Assign = 'id' 'opAssign' Expression 'lineEnd'
+Assign = 'id' MatrixIndex 'opAssign' Expression 'lineEnd'
+
+OperatorsBinary = 'opConc'
+OperatorsBinary = 'opLogic'
+OperatorsBinary = 'opRel'
+OperatorsBinary = 'opEquals'
+OperatorsBinary = 'opAditiv'
+OperatorsBinary = 'opMult'
+
+LoopWhCom = 'rwWhile' 'paramBeg' Expression 'paramEnd' Scope
+
+LoopForCom = 'rwFor' 'paramBeg' Assign 'lineEnd' Expression 'paramEnd' Scope
+LoopForCom = 'rwFor' 'paramBeg' Assign 'lineEnd' Expression 'lineEnd' Step 'paramEnd' Scope
+
+Step = 'id' 'opAssign' Expression
+
+CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope
+CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElif' 'paramBeg' Expression 'paramEnd' Scope
+CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElif' 'paramBeg' Expression 'paramEnd' Scope 'rwElse' Scope
+CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElse' Scope
+
+PrintCom = 'rwPrint' 'paramBeg' 'consString' 'paramEnd' 'lineEnd'
+PrintCom = 'rwPrint' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 'lineEnd'
+
+ReadCom = 'rwRead' 'paramBeg' 'consString' 'paramEnd' 'lineEnd'
+ReadCom = 'rwRead' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 'lineEnd'
+
+CallFunc = 'id' FuncParamsReal 'lineEnd'
+
+DeclFunc = 'main' 'paramBeg' 'paramEnd' SpecReturnType Scope
+DeclFunc = 'id' FuncParamsFormal SpecReturnType Scope
+
+SpecReturnType = 'opSpecType' 'rwVoid'
+SpecReturnType = 'opSpecType' FormalType
+
+FormalType = TypeAtomic
+FormalType = TypeArrayUndefined
+
+TypeArrayUndefined = TypeArrayUndefined 'arrayBeg' 'arrayEnd'
+TypeArrayUndefined = TypeAtomic 'arrayBeg' 'arrayEnd'
+
+FuncParamsFormal = 'paramBeg' 'paramEnd'
+FuncParamsFormal = 'paramBeg' FuncParamsFormalR 'paramEnd'
+
+FuncParamsFormalR = 'id' 'opSpecType' FormalType
+FuncParamsFormalR = 'id' 'opSpecType' FormalType 'commaSep' FuncParamsFormal
+
+FuncParamsReal = 'paramBeg' 'paramEnd'
+FuncParamsReal = 'paramBeg' ExpressionList 'paramEnd'
+
+Scope = 'scopeBeg' 'scopeEnd'
+Scope = 'scopeBeg' Commands 'scopeEnd'
+
+Commands = DeclVar Commands
+Commands = DeclVar
+Commands = Assign Commands
+Commands = Assign
+Commands = LoopWhCom Commands
+Commands = LoopWhCom
+Commands = LoopForCom Commands
+Commands = LoopForCom
+Commands = CondCom Commands
+Commands = CondCom
+Commands = PrintCom Commands
+Commands = PrintCom
+Commands = ReadCom Commands
+Commands = ReadCom
+Commands = CallFunc Commands
+Commands = CallFunc
+Commands = 'rwReturn' Expression 'lineEnd'
