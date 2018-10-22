@@ -12,8 +12,8 @@ DeclVar = 'id' RealType 'commaSep' DeclVar
 DeclVar = 'id' RealType 'opAssign' Expression 'lineEnd'
 DeclVar = 'id' RealType 'opAssign' Expression 'commaSep' DeclVar
 
-RealType = 'opSpecType' TypeAtomic
-RealType = 'opSpecType' TypeArray
+RealType = 'colonSep' TypeAtomic
+RealType = 'colonSep' TypeArray
 
 TypeAtomic = 'tInt'
 TypeAtomic = 'tFloat'
@@ -33,16 +33,30 @@ Literal = LiteralArray
 
 LiteralArray = 'arraybeg' ExpressionList 'arrayEnd'
 
-Expression = ExpressionR
-Expression = 'opUnMinus' ExpressionR
-Expression = 'opNot' ExpressionR
-Expression = Expression OperatorsBinary ExpressionR
+Expression = ExprLogicOr
 
-ExpressionR = 'paramBeg' Expression 'paramEnd'
-ExpressionR = 'id'
-ExpressionR = 'id' MatrixIndex
-ExpressionR = 'id' FuncParamsReal
-ExpressionR = Literal
+ExprLogicOr = ExprLogicOr 'opLogicOr' ExprLogicAnd
+ExprLogicOr = ExprLogicAnd
+ExprLogicAnd = ExprLogicAnd 'opLogicAnd' ExprEquals
+ExprLogicAnd = ExprEquals
+ExprEquals = ExprEquals 'opEquals' ExprAditiv
+ExprEquals = ExprMult 'opRel' ExprAditiv
+ExprEquals = ExprAditiv
+ExprAditiv = ExprAditiv 'opPlus' ExprMult
+ExprAditiv = ExprAditiv 'opMinus' ExprMult
+ExprAditiv = ExprMult
+ExprMult = ExprMult 'opMult' ExprExp
+ExprMult = ExprExp
+ExprExp = ExprExp 'opExp' ExprUnitary
+ExprExp = ExprUnitary
+ExprUnitary = 'opUnMinus' ExprUnitary
+ExprUnitary = 'opNot' ExprUnitary
+ExprUnitary = 'paramBeg' ExprLogicOr 'paramEnd'
+ExprUnitary = 'id'
+ExprUnitary = 'id' MatrixIndex
+ExprUnitary = 'id' FuncParamsReal
+ExprUnitary = 'rwLength' FuncParamsReal
+ExprUnitary = Literal
 
 ExpressionList = Expression
 ExpressionList = ExpressionList 'commaSep' Expression
@@ -53,17 +67,10 @@ MatrixIndex = 'arrayBeg' Expression 'arrayEnd'
 Assign = 'id' 'opAssign' Expression 'lineEnd'
 Assign = 'id' MatrixIndex 'opAssign' Expression 'lineEnd'
 
-OperatorsBinary = 'opConc'
-OperatorsBinary = 'opLogic'
-OperatorsBinary = 'opRel'
-OperatorsBinary = 'opEquals'
-OperatorsBinary = 'opAditiv'
-OperatorsBinary = 'opMult'
-
 LoopWhCom = 'rwWhile' 'paramBeg' Expression 'paramEnd' Scope
 
-LoopForCom = 'rwFor' 'paramBeg' Assign 'lineEnd' Expression 'paramEnd' Scope
-LoopForCom = 'rwFor' 'paramBeg' Assign 'lineEnd' Expression 'lineEnd' Step 'paramEnd' Scope
+LoopForCom = 'rwFor' 'paramBeg' Assign Expression 'paramEnd' Scope
+LoopForCom = 'rwFor' 'paramBeg' Assign Expression 'lineEnd' Step 'paramEnd' Scope
 
 Step = 'id' 'opAssign' Expression
 
@@ -83,8 +90,8 @@ CallFunc = 'id' FuncParamsReal 'lineEnd'
 DeclFunc = 'main' 'paramBeg' 'paramEnd' SpecReturnType Scope
 DeclFunc = 'id' FuncParamsFormal SpecReturnType Scope
 
-SpecReturnType = 'opSpecType' 'rwVoid'
-SpecReturnType = 'opSpecType' FormalType
+SpecReturnType = 'colonSep' 'rwVoid'
+SpecReturnType = 'colonSep' FormalType
 
 FormalType = TypeAtomic
 FormalType = TypeArrayUndefined
@@ -95,8 +102,8 @@ TypeArrayUndefined = TypeAtomic 'arrayBeg' 'arrayEnd'
 FuncParamsFormal = 'paramBeg' 'paramEnd'
 FuncParamsFormal = 'paramBeg' FuncParamsFormalR 'paramEnd'
 
-FuncParamsFormalR = 'id' 'opSpecType' FormalType
-FuncParamsFormalR = 'id' 'opSpecType' FormalType 'commaSep' FuncParamsFormal
+FuncParamsFormalR = 'id' 'colonSep' FormalType
+FuncParamsFormalR = 'id' 'colonSep' FormalType 'commaSep' FuncParamsFormal
 
 FuncParamsReal = 'paramBeg' 'paramEnd'
 FuncParamsReal = 'paramBeg' ExpressionList 'paramEnd'

@@ -19,52 +19,69 @@ public class Syntactic {
         this.grammar = grammar;
         this.slrTableAction = slrTableAction;
         this.slrTableTransition = slrTableTransition;
-        this.stack = new Stack<>();
+        this.stack = new Stack();
     }
 
     public boolean analyze() {
         this.stack.push(new Tuple(0));
         int state, tokenColumn;
-        String action;
-        while(lexic.hasNextToken()) {
-            Token token = lexic.nextToken();
+        String action = "";
+
+        Token token = null;
+        if (lexic.hasNextToken()) {
+            token = lexic.nextToken();
             System.out.println(token);
+        }
+
+        if (token == null) {
+            System.out.println("Erro! Arquivo vazio.");
+            return false;
+        }
+
+        while (!action.equals("acc")) {
+//            System.out.println("\n" + stack.peek() + " " + (token == null ? "$" : token.getCategory()));
 
             state = this.stack.peek().state;
-            System.out.println(this.slrTableAction.getTableHeader().keySet());
-            System.out.println(this.slrTableAction.getTableHeader().values());
-            System.out.println(this.slrTableAction.getTableHeader().get("id"));
-            assert this.slrTableAction != null;
-            assert this.slrTableAction.getTableHeader() != null;
-            assert token != null;
-            assert token.getCategory() != null;
-            assert this.slrTableAction.getTableHeader().get(token.getCategory().toString()) != null;
 
-            tokenColumn = this.slrTableAction.getTableHeader().get(token.getCategory().toString());
+//            assert this.slrTableAction != null;
+//            assert this.slrTableAction.getTableHeader() != null;
+//            assert (token == null ? "$" : token.getCategory().toString()) != null;
+//            if (this.slrTableAction.getTableHeader().get(token == null ? "$" : token.getCategory().toString()) == null) {
+//                System.out.println(">>>>>>>> KEY ERROR: " + (token == null ? "$" : token.getCategory().toString()));
+//            }
 
-             action = this.slrTableAction.getTableContent()[state][tokenColumn];
+            tokenColumn = this.slrTableAction.getTableHeader().get(token == null ? "$" : token.getCategory().toString());
+            action = this.slrTableAction.getTableContent()[state][tokenColumn];
+//            System.out.println("ACTION: " + action);
 
-             if (action.startsWith("s")) {
-                this.stack.push(new Tuple(Integer.valueOf(action.substring(1)), token.getCategory().toString(), true));
-             } else if (action.startsWith("r")) {
-                 int prod = Integer.valueOf(action.substring(1));
-                 Production production = this.grammar.getProductions().get(prod);
-                 for (int i = production.getSize(); i > 0; i--)
-                     this.stack.pop();
-                 tokenColumn = this.slrTableTransition.getTableHeader().get(production.getLeft());
-                 state = Integer.valueOf(this.slrTableTransition.getTableContent()[this.stack.peek().state][tokenColumn]);
-                 stack.push(new Tuple(state, production.getLeft(), false));
-             }
+            if (action == null) {
+                System.out.println("Erro!");
+                return false;
+            } else if (action.startsWith("s")) {
+                this.stack.push(new Tuple(Integer.valueOf(action.substring(1)), token == null ? "$" : token.getCategory().toString(), true));
+
+                if (lexic.hasNextToken()) {
+                    token = lexic.nextToken();
+                    System.out.println(token);
+                } else {
+                    token = null;
+                }
+
+            } else if (action.startsWith("r")) {
+                int prod = Integer.valueOf(action.substring(1));
+                Production production = this.grammar.getProductions().get(prod);
+
+                for (int i = production.getSize(); i > 0; i--)
+                    this.stack.pop();
+
+                tokenColumn = this.slrTableTransition.getTableHeader().get(production.getLeft());
+                state = Integer.valueOf(this.slrTableTransition.getTableContent()[this.stack.peek().state][tokenColumn]);
+                stack.push(new Tuple(state, production.getLeft(), false));
+            }
         }
-        state = this.stack.peek().state;
-        action = slrTableAction.getTableContent()[state][slrTableAction.getTableContentNumColumns() - 1];
 
-        if (action.equals("acc")) {
-            System.out.println("ACEITO!");
-            return true;
-        }
-        System.out.println("FALHOU!");
-        return false;
+        System.out.println("ACEITO!");
+        return true;
     }
 
     private class Tuple {
@@ -80,6 +97,11 @@ public class Syntactic {
             this.state = state;
             this.element = element;
             this.isToken = isToken;
+        }
+
+        @Override
+        public String toString() {
+            return "(state: " + state + ", element: " + element + ", isToken: " + isToken + ")";
         }
     }
 }

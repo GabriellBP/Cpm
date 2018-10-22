@@ -23,12 +23,13 @@ public class SLRTable {
 
             BufferedReader buffer = new BufferedReader(new FileReader(csvFile));
 
-            tableHeader = new HashMap<>();
+            tableHeader = new HashMap();
 
             line = buffer.readLine();
             for (String column : line.split(";")) {
                 this.tableHeader.put(column.replace("'", ""), lineCounter);
                 lineCounter++;
+//                System.out.println(">>>>>>>>> " + column.replace("'", "") + " count: " + lineCounter);
             }
 
             this.tableContentNumColumns = lineCounter;

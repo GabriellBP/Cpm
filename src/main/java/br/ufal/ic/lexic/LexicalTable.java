@@ -43,8 +43,8 @@ public class LexicalTable {
 
         operators.put("!", TokenCategory.opNot);
         operators.put("=", TokenCategory.opAssign);
-        operators.put("||", TokenCategory.opLogic);
-        operators.put("&&", TokenCategory.opLogic);
+        operators.put("||", TokenCategory.opLogicAnd);
+        operators.put("&&", TokenCategory.opLogicOr);
         operators.put("+", TokenCategory.opPlus);
         operators.put("-", TokenCategory.opMinus);
         operators.put("*", TokenCategory.opMult);

@@ -9,6 +9,7 @@ public class Lexic {
     private String currentLineContent;
     private int currentLine, currentColumn;
     private BufferedReader buffer;
+    private boolean reachedEOF = false;
 
     public Lexic(String filepath) throws FileNotFoundException {
         this.currentLine = -1;
@@ -17,6 +18,10 @@ public class Lexic {
     }
 
     public boolean hasNextToken() {
+        if (this.reachedEOF) {
+            return false;
+        }
+
         String line = currentLineContent != null ? currentLineContent.substring(currentColumn) : null;
 //        if (line != null) System.out.print("> " + line);
         try {
@@ -28,6 +33,7 @@ public class Lexic {
 
                 if (line == null) {
 //                    System.out.println(" FALSE");
+                    this.reachedEOF = true;
                     return false;
                 }
                 currentLineContent = line;
