@@ -77,6 +77,11 @@ public class Lexic {
                 while (c != '"') { // reads until finds "
                     tValue.append(c);
                     c = nextChar();
+
+                    if (c == '\n') {
+                        printError(tLine, currentColumn + 1, "caractere '\"' esperado");
+                        return null;
+                    }
                 }
                 tValue.append(c);
                 currentColumn++;
@@ -91,6 +96,9 @@ public class Lexic {
                 if (c == '\'') {
                     tValue.append(c);
                     currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '\'' esperado");
+                    return null;
                 }
             } else if (c == '<' || c == '=' || c == '>') {
                 tValue.append(c);
@@ -105,6 +113,9 @@ public class Lexic {
                 if (c == '&') {
                     tValue.append(c);
                     currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '&' esperado");
+                    return null;
                 }
             } else if (c == '|') {
                 tValue.append(c);
@@ -112,6 +123,9 @@ public class Lexic {
                 if (c == '|') {
                     tValue.append(c);
                     currentColumn++;
+                } else {
+                    printError(tLine, currentColumn + 1, "caractere '|' esperado");
+                    return null;
                 }
             } else {
                 tValue.append(c);
@@ -120,6 +134,10 @@ public class Lexic {
         }
         String value = tValue.toString().trim();
         token = new Token(value, tLine, tColumn, findTokenCategory(value));
+
+        if (token.getCategory() == TokenCategory.unknown) {
+            printError(token.getTokenLine(), token.getTokenColumn(), "'" + token.getValue() +"' inesperado");
+        }
         return token;
     }
 
@@ -160,5 +178,9 @@ public class Lexic {
         }
 
         return TokenCategory.unknown;
+    }
+
+    private void printError(int line, int column, String message) {
+        System.err.printf("Erro! [Linha %d, coluna %d]: %s.", line, column, message);
     }
 }

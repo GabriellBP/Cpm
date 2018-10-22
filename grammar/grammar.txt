@@ -21,8 +21,8 @@ TypeAtomic = 'tBool'
 TypeAtomic = 'tChar'
 TypeAtomic = 'tString'
 
-TypeArray = TypeArray 'arrayBeg' 'consNumInt' 'arrayEnd'
-TypeArray = TypeAtomic 'arrayBeg' 'consNumInt' 'arrayEnd'
+TypeArray = TypeArray 'arrayBeg' Expression 'arrayEnd'
+TypeArray = TypeAtomic 'arrayBeg' Expression 'arrayEnd'
 
 Literal = 'consNumInt'
 Literal = 'consNumFlo'
@@ -55,7 +55,7 @@ ExprUnitary = 'paramBeg' ExprLogicOr 'paramEnd'
 ExprUnitary = 'id'
 ExprUnitary = 'id' MatrixIndex
 ExprUnitary = 'id' FuncParamsReal
-ExprUnitary = 'rwLength' FuncParamsReal
+ExprUnitary = 'rwLength' 'paramBeg' ExprUnitary 'paramEnd'
 ExprUnitary = Literal
 
 ExpressionList = Expression

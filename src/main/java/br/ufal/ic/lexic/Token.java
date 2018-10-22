@@ -27,7 +27,7 @@ public class Token {
     }
 
     public int getTokenLine() {
-        return tokenLine;
+        return tokenLine + 1;
     }
 
     public void setTokenLine(int tokenLine) {
@@ -35,7 +35,7 @@ public class Token {
     }
 
     public int getTokenColumn() {
-        return tokenColumn;
+        return tokenColumn + 1;
     }
 
     public void setTokenColumn(int tokenColumn) {

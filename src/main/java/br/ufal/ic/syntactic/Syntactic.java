@@ -2,6 +2,7 @@ package br.ufal.ic.syntactic;
 
 import br.ufal.ic.lexic.Lexic;
 import br.ufal.ic.lexic.Token;
+import br.ufal.ic.lexic.TokenCategory;
 import br.ufal.ic.syntactic.slr.Grammar;
 import br.ufal.ic.syntactic.slr.Production;
 import br.ufal.ic.syntactic.slr.SLRTable;
@@ -34,7 +35,7 @@ public class Syntactic {
         }
 
         if (token == null) {
-            System.out.println("Erro! Arquivo vazio.");
+            System.err.println("Erro! Arquivo vazio.");
             return false;
         }
 
@@ -55,7 +56,11 @@ public class Syntactic {
 //            System.out.println("ACTION: " + action);
 
             if (action == null) {
-                System.out.println("Erro!");
+                if (token == null) {
+                    System.err.println("Erro ao final do arquivo!");
+                } else {
+                    System.err.printf("Erro! [Linha %d, coluna %d]: (%s, '%s') inesperado", token.getTokenLine(), token.getTokenColumn(), token.getCategory().toString(), token.getValue());
+                }
                 return false;
             } else if (action.startsWith("s")) {
                 this.stack.push(new Tuple(Integer.valueOf(action.substring(1)), token == null ? "$" : token.getCategory().toString(), true));
@@ -63,6 +68,10 @@ public class Syntactic {
                 if (lexic.hasNextToken()) {
                     token = lexic.nextToken();
                     System.out.println(token);
+
+                    if (token == null || token.getCategory() == TokenCategory.unknown) { // erro léxico
+                        return false;
+                    }
                 } else {
                     token = null;
                 }
