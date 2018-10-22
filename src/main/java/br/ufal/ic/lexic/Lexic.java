@@ -23,16 +23,13 @@ public class Lexic {
         }
 
         String line = currentLineContent != null ? currentLineContent.substring(currentColumn) : null;
-//        if (line != null) System.out.print("> " + line);
         try {
             while (line == null || !line.matches("[\\s]*[^\\s].*")) {
                 line = buffer.readLine();
                 currentLine++;
-//                System.out.print(" (++) ");
                 currentColumn = 0;
 
                 if (line == null) {
-//                    System.out.println(" FALSE");
                     this.reachedEOF = true;
                     return false;
                 }
@@ -42,7 +39,6 @@ public class Lexic {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        System.out.println(" TRUE");
         return true;
     }
 
@@ -68,12 +64,10 @@ public class Lexic {
                 c = nextChar();
             }
         } else {
-//            System.out.print(c);
             while (!LexicalTable.tokenEndings.contains(c)) {
                 tValue.append(c);
                 c = nextChar();
             }
-//            System.out.println(" -->" + tValue + " (" + currentLine + ", " + currentColumn + ")");
         }
 
         if (tValue.length() == 0) {
@@ -126,8 +120,6 @@ public class Lexic {
         }
         String value = tValue.toString().trim();
         token = new Token(value, tLine, tColumn, findTokenCategory(value));
-//        previousToken = currentToken;
-//        currentToken = token;
         return token;
     }
 

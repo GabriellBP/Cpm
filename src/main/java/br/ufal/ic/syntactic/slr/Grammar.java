@@ -15,7 +15,6 @@ public class Grammar {
         while (line != null) {
             if (!line.equals("")) {
                 productions.add(new Production(line));
-//                System.out.println(productions.size() - 1 + " - " + productions.get(productions.size() - 1));
             }
             line = buffer.readLine();
         }

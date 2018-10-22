@@ -29,7 +29,6 @@ public class SLRTable {
             for (String column : line.split(";")) {
                 this.tableHeader.put(column.replace("'", ""), lineCounter);
                 lineCounter++;
-//                System.out.println(">>>>>>>>> " + column.replace("'", "") + " count: " + lineCounter);
             }
 
             this.tableContentNumColumns = lineCounter;
