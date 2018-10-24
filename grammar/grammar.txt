@@ -1,9 +1,8 @@
 S = Code
 
 Code = DeclVarG Code
-Code = DeclVarG
 Code = DeclFunc Code
-Code = DeclFunc
+Code = DeclFuncMain
 
 DeclVarG = DeclVar
 
@@ -51,7 +50,7 @@ ExprExp = ExprParams
 ExprParams = 'paramBeg' ExprLogicOr 'paramEnd'
 ExprParams = ExprUnitary
 ExprUnitary = 'opUnMinus' ExprParams
-ExprUnitary = 'opNot' ExprUnitary
+ExprUnitary = 'opNot' ExprParams
 ExprUnitary = 'id'
 ExprUnitary = 'id' MatrixIndex
 ExprUnitary = 'id' FuncParamsReal
@@ -85,11 +84,14 @@ ReadCom = 'rwRead' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 
 
 CallFunc = 'id' FuncParamsReal 'lineEnd'
 
-DeclFunc = 'main' 'paramBeg' 'paramEnd' SpecReturnType Scope
+DeclFuncMain = 'main' 'paramBeg' 'paramEnd' SpecReturnTypeVoid Scope
+
 DeclFunc = 'id' FuncParamsFormal SpecReturnType Scope
 
-SpecReturnType = 'colonSep' 'rwVoid'
 SpecReturnType = 'colonSep' FormalType
+SpecReturnType = SpecReturnTypeVoid
+
+SpecReturnTypeVoid = 'colonSep' 'rwVoid'
 
 FormalType = TypeAtomic
 FormalType = TypeArrayUndefined

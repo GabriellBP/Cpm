@@ -47,7 +47,7 @@ public class Syntactic {
 
             if (action == null) {
                 if (token == null) {
-                    System.err.println("Erro ao final do arquivo!");
+                    System.err.println("Código não reconhecido!");
                 } else {
                     System.err.printf("Erro! [Linha %d, coluna %d]: (%s, '%s') inesperado", token.getTokenLine(), token.getTokenColumn(), token.getCategory().toString(), token.getValue());
                 }
