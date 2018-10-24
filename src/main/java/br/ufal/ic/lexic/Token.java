@@ -52,7 +52,7 @@ public class Token {
 
     @Override
     public String toString() {
-        String fmt = "        [%04d, %04d] (%04d, %10s) {%s}";
+        String fmt = "              [%04d, %04d] (%04d, %10s) {%s}";
         return String.format(fmt, tokenLine+1, tokenColumn+1, category.ordinal(), category.toString(), value);
     }
 }

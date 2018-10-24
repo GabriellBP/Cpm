@@ -21,7 +21,6 @@ TypeAtomic = 'tBool'
 TypeAtomic = 'tChar'
 TypeAtomic = 'tString'
 
-TypeArray = TypeArray 'arrayBeg' Expression 'arrayEnd'
 TypeArray = TypeAtomic 'arrayBeg' Expression 'arrayEnd'
 
 Literal = 'consNumInt'
@@ -40,7 +39,7 @@ ExprLogicOr = ExprLogicAnd
 ExprLogicAnd = ExprLogicAnd 'opLogicAnd' ExprEquals
 ExprLogicAnd = ExprEquals
 ExprEquals = ExprEquals 'opEquals' ExprAditiv
-ExprEquals = ExprMult 'opRel' ExprAditiv
+ExprEquals = ExprEquals 'opRel' ExprAditiv
 ExprEquals = ExprAditiv
 ExprAditiv = ExprAditiv 'opPlus' ExprMult
 ExprAditiv = ExprAditiv 'opMinus' ExprMult
@@ -48,10 +47,11 @@ ExprAditiv = ExprMult
 ExprMult = ExprMult 'opMult' ExprExp
 ExprMult = ExprExp
 ExprExp = ExprExp 'opExp' ExprUnitary
-ExprExp = ExprUnitary
-ExprUnitary = 'opUnMinus' ExprUnitary
+ExprExp = ExprParams
+ExprParams = 'paramBeg' ExprLogicOr 'paramEnd'
+ExprParams = ExprUnitary
+ExprUnitary = 'opUnMinus' ExprParams
 ExprUnitary = 'opNot' ExprUnitary
-ExprUnitary = 'paramBeg' ExprLogicOr 'paramEnd'
 ExprUnitary = 'id'
 ExprUnitary = 'id' MatrixIndex
 ExprUnitary = 'id' FuncParamsReal
@@ -67,17 +67,15 @@ MatrixIndex = 'arrayBeg' Expression 'arrayEnd'
 Assign = 'id' 'opAssign' Expression 'lineEnd'
 Assign = 'id' MatrixIndex 'opAssign' Expression 'lineEnd'
 
-LoopWhCom = 'rwWhile' 'paramBeg' Expression 'paramEnd' Scope
+LoopWhCom = 'rwWhile' ExprParams Scope
 
 LoopForCom = 'rwFor' 'paramBeg' Assign Expression 'paramEnd' Scope
-LoopForCom = 'rwFor' 'paramBeg' Assign Expression 'lineEnd' Step 'paramEnd' Scope
+LoopForCom = 'rwFor' 'paramBeg' Assign Expression 'lineEnd' Expression 'paramEnd' Scope
 
-Step = 'id' 'opAssign' Expression
-
-CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope
-CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElif' 'paramBeg' Expression 'paramEnd' Scope
-CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElif' 'paramBeg' Expression 'paramEnd' Scope 'rwElse' Scope
-CondCom = 'rwIf' 'paramBeg' Expression 'paramEnd' Scope 'rwElse' Scope
+CondCom = 'rwIf' ExprParams Scope
+CondCom = 'rwIf' ExprParams Scope 'rwElif' ExprParams Scope
+CondCom = 'rwIf' ExprParams Scope 'rwElif' ExprParams Scope 'rwElse' Scope
+CondCom = 'rwIf' ExprParams Scope 'rwElse' Scope
 
 PrintCom = 'rwPrint' 'paramBeg' 'consString' 'paramEnd' 'lineEnd'
 PrintCom = 'rwPrint' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 'lineEnd'
@@ -96,7 +94,6 @@ SpecReturnType = 'colonSep' FormalType
 FormalType = TypeAtomic
 FormalType = TypeArrayUndefined
 
-TypeArrayUndefined = TypeArrayUndefined 'arrayBeg' 'arrayEnd'
 TypeArrayUndefined = TypeAtomic 'arrayBeg' 'arrayEnd'
 
 FuncParamsFormal = 'paramBeg' 'paramEnd'

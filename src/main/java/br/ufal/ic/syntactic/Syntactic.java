@@ -40,20 +40,10 @@ public class Syntactic {
         }
 
         while (!action.equals("acc")) {
-//            System.out.println("\n" + stack.peek() + " " + (token == null ? "$" : token.getCategory()));
-
             state = this.stack.peek().state;
-
-//            assert this.slrTableAction != null;
-//            assert this.slrTableAction.getTableHeader() != null;
-//            assert (token == null ? "$" : token.getCategory().toString()) != null;
-//            if (this.slrTableAction.getTableHeader().get(token == null ? "$" : token.getCategory().toString()) == null) {
-//                System.out.println(">>>>>>>> KEY ERROR: " + (token == null ? "$" : token.getCategory().toString()));
-//            }
 
             tokenColumn = this.slrTableAction.getTableHeader().get(token == null ? "$" : token.getCategory().toString());
             action = this.slrTableAction.getTableContent()[state][tokenColumn];
-//            System.out.println("ACTION: " + action);
 
             if (action == null) {
                 if (token == null) {
@@ -79,6 +69,7 @@ public class Syntactic {
             } else if (action.startsWith("r")) {
                 int prod = Integer.valueOf(action.substring(1));
                 Production production = this.grammar.getProductions().get(prod);
+                System.out.println(production.toString());
 
                 for (int i = production.getSize(); i > 0; i--)
                     this.stack.pop();

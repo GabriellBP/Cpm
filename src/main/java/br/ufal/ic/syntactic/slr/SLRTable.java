@@ -55,9 +55,10 @@ public class SLRTable {
             }
         } catch(FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Falha ao ler o arquivo");
+            System.out.println("Arquivo não encontrado");
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Falha ao ler o arquivo");
         }
     }
 

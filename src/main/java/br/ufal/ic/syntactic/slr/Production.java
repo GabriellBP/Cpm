@@ -14,9 +14,10 @@ public class Production {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder("_" + left + "_ =");
+        StringBuilder ret = new StringBuilder("          " + left);
+        ret.append(" = ");
         for (String el : right) {
-            ret.append(" _").append(el).append("_");
+            ret.append(" ").append(el);
         }
 
         return ret.toString();
