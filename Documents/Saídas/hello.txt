@@ -1,0 +1,22 @@
+   1  main(): void {
+              [0001, 0001] (0000,       main) {main}
+              [0001, 0005] (0009,   paramBeg) {(}
+              [0001, 0006] (0010,   paramEnd) {)}
+              [0001, 0007] (0015,   colonSep) {:}
+              [0001, 0009] (0030,     rwVoid) {void}
+              [0001, 0014] (0007,   scopeBeg) {{}
+          SpecReturnTypeVoid =  'colonSep' 'rwVoid'
+   2      print("Alô mundo!");
+              [0002, 0005] (0021,    rwPrint) {print}
+              [0002, 0010] (0009,   paramBeg) {(}
+              [0002, 0011] (0020, consString) {Alô mundo!}
+              [0002, 0023] (0010,   paramEnd) {)}
+              [0002, 0024] (0013,    lineEnd) {;}
+   3  }
+              [0003, 0001] (0008,   scopeEnd) {}}
+          PrintCom =  'rwPrint' 'paramBeg' 'consString' 'paramEnd' 'lineEnd'
+          Commands =  PrintCom
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          DeclFuncMain =  'main' 'paramBeg' 'paramEnd' SpecReturnTypeVoid Scope
+          Code =  DeclFuncMain
+---------- CÓDIGO ACEITO ----------

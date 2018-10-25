@@ -80,7 +80,7 @@ public class Syntactic {
             }
         }
 
-        System.out.println("ACEITO!");
+        System.out.println("---------- CÓDIGO ACEITO ----------");
         return true;
     }
 

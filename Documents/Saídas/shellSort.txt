@@ -1,0 +1,707 @@
+   1  shellSort(vet: int[]): int[] {
+              [0001, 0001] (0001,         id) {shellSort}
+              [0001, 0010] (0009,   paramBeg) {(}
+              [0001, 0011] (0001,         id) {vet}
+              [0001, 0014] (0015,   colonSep) {:}
+              [0001, 0016] (0002,       tInt) {int}
+              [0001, 0019] (0011,   arrayBeg) {[}
+          TypeAtomic =  'tInt'
+              [0001, 0020] (0012,   arrayEnd) {]}
+              [0001, 0021] (0010,   paramEnd) {)}
+          TypeArrayUndefined =  TypeAtomic 'arrayBeg' 'arrayEnd'
+          FormalType =  TypeArrayUndefined
+          FuncParamsFormalR =  'id' 'colonSep' FormalType
+              [0001, 0022] (0015,   colonSep) {:}
+          FuncParamsFormal =  'paramBeg' FuncParamsFormalR 'paramEnd'
+              [0001, 0024] (0002,       tInt) {int}
+              [0001, 0027] (0011,   arrayBeg) {[}
+          TypeAtomic =  'tInt'
+              [0001, 0028] (0012,   arrayEnd) {]}
+              [0001, 0030] (0007,   scopeBeg) {{}
+          TypeArrayUndefined =  TypeAtomic 'arrayBeg' 'arrayEnd'
+          FormalType =  TypeArrayUndefined
+          SpecReturnType =  'colonSep' FormalType
+   2     	i: int, j: int, value: int;
+              [0002, 0005] (0001,         id) {i}
+              [0002, 0006] (0015,   colonSep) {:}
+              [0002, 0008] (0002,       tInt) {int}
+              [0002, 0011] (0014,   commaSep) {,}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+              [0002, 0013] (0001,         id) {j}
+              [0002, 0014] (0015,   colonSep) {:}
+              [0002, 0016] (0002,       tInt) {int}
+              [0002, 0019] (0014,   commaSep) {,}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+              [0002, 0021] (0001,         id) {value}
+              [0002, 0026] (0015,   colonSep) {:}
+              [0002, 0028] (0002,       tInt) {int}
+              [0002, 0031] (0013,    lineEnd) {;}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+   3  	gap: int = 1;
+              [0003, 0002] (0001,         id) {gap}
+          DeclVar =  'id' RealType 'lineEnd'
+          DeclVar =  'id' RealType 'commaSep' DeclVar
+          DeclVar =  'id' RealType 'commaSep' DeclVar
+              [0003, 0005] (0015,   colonSep) {:}
+              [0003, 0007] (0002,       tInt) {int}
+              [0003, 0011] (0031,   opAssign) {=}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+              [0003, 0013] (0016, consNumInt) {1}
+              [0003, 0014] (0013,    lineEnd) {;}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+   4     	while(gap < length(vet)) {
+              [0004, 0005] (0028,    rwWhile) {while}
+          DeclVar =  'id' RealType 'opAssign' Expression 'lineEnd'
+              [0004, 0010] (0009,   paramBeg) {(}
+              [0004, 0011] (0001,         id) {gap}
+              [0004, 0015] (0039,      opRel) {<}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+              [0004, 0017] (0023,   rwLength) {length}
+              [0004, 0023] (0009,   paramBeg) {(}
+              [0004, 0024] (0001,         id) {vet}
+              [0004, 0027] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+              [0004, 0028] (0010,   paramEnd) {)}
+          ExprUnitary =  'rwLength' 'paramBeg' ExprUnitary 'paramEnd'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprEquals 'opRel' ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+              [0004, 0030] (0007,   scopeBeg) {{}
+          ExprParams =  'paramBeg' ExprLogicOr 'paramEnd'
+   5         	gap = 3*gap+1;
+              [0005, 0009] (0001,         id) {gap}
+              [0005, 0013] (0031,   opAssign) {=}
+              [0005, 0015] (0016, consNumInt) {3}
+              [0005, 0016] (0037,     opMult) {*}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+              [0005, 0017] (0001,         id) {gap}
+              [0005, 0020] (0035,     opPlus) {+}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprMult 'opMult' ExprExp
+          ExprAditiv =  ExprMult
+              [0005, 0021] (0016, consNumInt) {1}
+              [0005, 0022] (0013,    lineEnd) {;}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprAditiv 'opPlus' ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+   6     	}
+              [0006, 0005] (0008,   scopeEnd) {}}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+          Commands =  Assign
+   7     	while(gap > 1) {
+              [0007, 0005] (0028,    rwWhile) {while}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopWhCom =  'rwWhile' ExprParams Scope
+              [0007, 0010] (0009,   paramBeg) {(}
+              [0007, 0011] (0001,         id) {gap}
+              [0007, 0015] (0039,      opRel) {>}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+              [0007, 0017] (0016, consNumInt) {1}
+              [0007, 0018] (0010,   paramEnd) {)}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprEquals 'opRel' ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+              [0007, 0020] (0007,   scopeBeg) {{}
+          ExprParams =  'paramBeg' ExprLogicOr 'paramEnd'
+   8         	gap = gap / 3;
+              [0008, 0009] (0001,         id) {gap}
+              [0008, 0013] (0031,   opAssign) {=}
+              [0008, 0015] (0001,         id) {gap}
+              [0008, 0019] (0037,     opMult) {/}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+              [0008, 0021] (0016, consNumInt) {3}
+              [0008, 0022] (0013,    lineEnd) {;}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprMult 'opMult' ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+   9         	for(i = gap; length(vet) - 1) {
+              [0009, 0009] (0027,      rwFor) {for}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0009, 0012] (0009,   paramBeg) {(}
+              [0009, 0013] (0001,         id) {i}
+              [0009, 0015] (0031,   opAssign) {=}
+              [0009, 0017] (0001,         id) {gap}
+              [0009, 0020] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0009, 0022] (0023,   rwLength) {length}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0009, 0028] (0009,   paramBeg) {(}
+              [0009, 0029] (0001,         id) {vet}
+              [0009, 0032] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+              [0009, 0034] (0036,    opMinus) {-}
+          ExprUnitary =  'rwLength' 'paramBeg' ExprUnitary 'paramEnd'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+              [0009, 0036] (0016, consNumInt) {1}
+              [0009, 0037] (0010,   paramEnd) {)}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprAditiv 'opMinus' ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0009, 0039] (0007,   scopeBeg) {{}
+  10             	value = vet[i];
+              [0010, 0013] (0001,         id) {value}
+              [0010, 0019] (0031,   opAssign) {=}
+              [0010, 0021] (0001,         id) {vet}
+              [0010, 0024] (0011,   arrayBeg) {[}
+              [0010, 0025] (0001,         id) {i}
+              [0010, 0026] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0010, 0027] (0013,    lineEnd) {;}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+          ExprUnitary =  'id' MatrixIndex
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  11             	j = i;
+              [0011, 0013] (0001,         id) {j}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0011, 0015] (0031,   opAssign) {=}
+              [0011, 0017] (0001,         id) {i}
+              [0011, 0018] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  12             	while(j >= gap && value < vet[j - gap]) {
+              [0012, 0013] (0028,    rwWhile) {while}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0012, 0018] (0009,   paramBeg) {(}
+              [0012, 0019] (0001,         id) {j}
+              [0012, 0021] (0039,      opRel) {>=}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+              [0012, 0024] (0001,         id) {gap}
+              [0012, 0028] (0033,  opLogicOr) {&&}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprEquals 'opRel' ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+              [0012, 0031] (0001,         id) {value}
+              [0012, 0037] (0039,      opRel) {<}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+              [0012, 0039] (0001,         id) {vet}
+              [0012, 0042] (0011,   arrayBeg) {[}
+              [0012, 0043] (0001,         id) {j}
+              [0012, 0045] (0036,    opMinus) {-}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+              [0012, 0047] (0001,         id) {gap}
+              [0012, 0050] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprAditiv 'opMinus' ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0012, 0051] (0010,   paramEnd) {)}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+          ExprUnitary =  'id' MatrixIndex
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprEquals 'opRel' ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicOr 'opLogicOr' ExprLogicAnd
+              [0012, 0053] (0007,   scopeBeg) {{}
+          ExprParams =  'paramBeg' ExprLogicOr 'paramEnd'
+  13                 		vet[j] = vet [j - gap];
+              [0013, 0018] (0001,         id) {vet}
+              [0013, 0021] (0011,   arrayBeg) {[}
+              [0013, 0022] (0001,         id) {j}
+              [0013, 0023] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0013, 0025] (0031,   opAssign) {=}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+              [0013, 0027] (0001,         id) {vet}
+              [0013, 0031] (0011,   arrayBeg) {[}
+              [0013, 0032] (0001,         id) {j}
+              [0013, 0034] (0036,    opMinus) {-}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+              [0013, 0036] (0001,         id) {gap}
+              [0013, 0039] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprAditiv 'opMinus' ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0013, 0040] (0013,    lineEnd) {;}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+          ExprUnitary =  'id' MatrixIndex
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  14                  		j = j - gap;
+              [0014, 0019] (0001,         id) {j}
+          Assign =  'id' MatrixIndex 'opAssign' Expression 'lineEnd'
+              [0014, 0021] (0031,   opAssign) {=}
+              [0014, 0023] (0001,         id) {j}
+              [0014, 0025] (0036,    opMinus) {-}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+              [0014, 0027] (0001,         id) {gap}
+              [0014, 0030] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprAditiv 'opMinus' ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  15              	}
+              [0015, 0014] (0008,   scopeEnd) {}}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+          Commands =  Assign
+          Commands =  Assign Commands
+  16              	vet[j] = value;
+              [0016, 0014] (0001,         id) {vet}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopWhCom =  'rwWhile' ExprParams Scope
+              [0016, 0017] (0011,   arrayBeg) {[}
+              [0016, 0018] (0001,         id) {j}
+              [0016, 0019] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0016, 0021] (0031,   opAssign) {=}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+              [0016, 0023] (0001,         id) {value}
+              [0016, 0028] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  17          	}
+              [0017, 0010] (0008,   scopeEnd) {}}
+          Assign =  'id' MatrixIndex 'opAssign' Expression 'lineEnd'
+          Commands =  Assign
+          Commands =  LoopWhCom Commands
+          Commands =  Assign Commands
+          Commands =  Assign Commands
+  18     	}
+              [0018, 0005] (0008,   scopeEnd) {}}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopForCom =  'rwFor' 'paramBeg' Assign Expression 'paramEnd' Scope
+          Commands =  LoopForCom
+          Commands =  Assign Commands
+  19     	return vet;
+              [0019, 0005] (0029,   rwReturn) {return}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopWhCom =  'rwWhile' ExprParams Scope
+              [0019, 0012] (0001,         id) {vet}
+              [0019, 0015] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  20  }
+              [0020, 0001] (0008,   scopeEnd) {}}
+          Commands =  'rwReturn' Expression 'lineEnd'
+          Commands =  LoopWhCom Commands
+          Commands =  LoopWhCom Commands
+          Commands =  DeclVar Commands
+          Commands =  DeclVar Commands
+  21
+  22  main(): void {
+              [0022, 0001] (0000,       main) {main}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          DeclFunc =  'id' FuncParamsFormal SpecReturnType Scope
+              [0022, 0005] (0009,   paramBeg) {(}
+              [0022, 0006] (0010,   paramEnd) {)}
+              [0022, 0007] (0015,   colonSep) {:}
+              [0022, 0009] (0030,     rwVoid) {void}
+              [0022, 0014] (0007,   scopeBeg) {{}
+          SpecReturnTypeVoid =  'colonSep' 'rwVoid'
+  23  	i: int, aux: int;
+              [0023, 0002] (0001,         id) {i}
+              [0023, 0003] (0015,   colonSep) {:}
+              [0023, 0005] (0002,       tInt) {int}
+              [0023, 0008] (0014,   commaSep) {,}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+              [0023, 0010] (0001,         id) {aux}
+              [0023, 0013] (0015,   colonSep) {:}
+              [0023, 0015] (0002,       tInt) {int}
+              [0023, 0018] (0013,    lineEnd) {;}
+          TypeAtomic =  'tInt'
+          RealType =  'colonSep' TypeAtomic
+  24  	v: int[5];
+              [0024, 0002] (0001,         id) {v}
+          DeclVar =  'id' RealType 'lineEnd'
+          DeclVar =  'id' RealType 'commaSep' DeclVar
+              [0024, 0003] (0015,   colonSep) {:}
+              [0024, 0005] (0002,       tInt) {int}
+              [0024, 0008] (0011,   arrayBeg) {[}
+          TypeAtomic =  'tInt'
+              [0024, 0009] (0016, consNumInt) {5}
+              [0024, 0010] (0012,   arrayEnd) {]}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0024, 0011] (0013,    lineEnd) {;}
+          TypeArray =  TypeAtomic 'arrayBeg' Expression 'arrayEnd'
+          RealType =  'colonSep' TypeArray
+  25
+  26  	for(i = 0; length(v)) {
+              [0026, 0002] (0027,      rwFor) {for}
+          DeclVar =  'id' RealType 'lineEnd'
+              [0026, 0005] (0009,   paramBeg) {(}
+              [0026, 0006] (0001,         id) {i}
+              [0026, 0008] (0031,   opAssign) {=}
+              [0026, 0010] (0016, consNumInt) {0}
+              [0026, 0011] (0013,    lineEnd) {;}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0026, 0013] (0023,   rwLength) {length}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0026, 0019] (0009,   paramBeg) {(}
+              [0026, 0020] (0001,         id) {v}
+              [0026, 0021] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+              [0026, 0022] (0010,   paramEnd) {)}
+          ExprUnitary =  'rwLength' 'paramBeg' ExprUnitary 'paramEnd'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0026, 0024] (0007,   scopeBeg) {{}
+  27  		read("%i", aux);
+              [0027, 0003] (0022,     rwRead) {read}
+              [0027, 0007] (0009,   paramBeg) {(}
+              [0027, 0008] (0020, consString) {%i}
+              [0027, 0012] (0014,   commaSep) {,}
+              [0027, 0014] (0001,         id) {aux}
+              [0027, 0017] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+          ExpressionList =  Expression
+              [0027, 0018] (0013,    lineEnd) {;}
+  28  		v[i] = aux;
+              [0028, 0003] (0001,         id) {v}
+          ReadCom =  'rwRead' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 'lineEnd'
+              [0028, 0004] (0011,   arrayBeg) {[}
+              [0028, 0005] (0001,         id) {i}
+              [0028, 0006] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0028, 0008] (0031,   opAssign) {=}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+              [0028, 0010] (0001,         id) {aux}
+              [0028, 0013] (0013,    lineEnd) {;}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  29  	}
+              [0029, 0002] (0008,   scopeEnd) {}}
+          Assign =  'id' MatrixIndex 'opAssign' Expression 'lineEnd'
+          Commands =  Assign
+          Commands =  ReadCom Commands
+  30
+  31  	v = shellSort(v);
+              [0031, 0002] (0001,         id) {v}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopForCom =  'rwFor' 'paramBeg' Assign Expression 'paramEnd' Scope
+              [0031, 0004] (0031,   opAssign) {=}
+              [0031, 0006] (0001,         id) {shellSort}
+              [0031, 0015] (0009,   paramBeg) {(}
+              [0031, 0016] (0001,         id) {v}
+              [0031, 0017] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+          ExpressionList =  Expression
+              [0031, 0018] (0013,    lineEnd) {;}
+          FuncParamsReal =  'paramBeg' ExpressionList 'paramEnd'
+          ExprUnitary =  'id' FuncParamsReal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+  32
+  33
+  34  	for(i = 0; length(v)) {
+              [0034, 0002] (0027,      rwFor) {for}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0034, 0005] (0009,   paramBeg) {(}
+              [0034, 0006] (0001,         id) {i}
+              [0034, 0008] (0031,   opAssign) {=}
+              [0034, 0010] (0016, consNumInt) {0}
+              [0034, 0011] (0013,    lineEnd) {;}
+          Literal =  'consNumInt'
+          ExprUnitary =  Literal
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0034, 0013] (0023,   rwLength) {length}
+          Assign =  'id' 'opAssign' Expression 'lineEnd'
+              [0034, 0019] (0009,   paramBeg) {(}
+              [0034, 0020] (0001,         id) {v}
+              [0034, 0021] (0010,   paramEnd) {)}
+          ExprUnitary =  'id'
+              [0034, 0022] (0010,   paramEnd) {)}
+          ExprUnitary =  'rwLength' 'paramBeg' ExprUnitary 'paramEnd'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0034, 0024] (0007,   scopeBeg) {{}
+  35  		print("%i ", v[i]);
+              [0035, 0003] (0021,    rwPrint) {print}
+              [0035, 0008] (0009,   paramBeg) {(}
+              [0035, 0009] (0020, consString) {%i }
+              [0035, 0014] (0014,   commaSep) {,}
+              [0035, 0016] (0001,         id) {v}
+              [0035, 0017] (0011,   arrayBeg) {[}
+              [0035, 0018] (0001,         id) {i}
+              [0035, 0019] (0012,   arrayEnd) {]}
+          ExprUnitary =  'id'
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+              [0035, 0020] (0010,   paramEnd) {)}
+          MatrixIndex =  'arrayBeg' Expression 'arrayEnd'
+          ExprUnitary =  'id' MatrixIndex
+          ExprParams =  ExprUnitary
+          ExprExp =  ExprParams
+          ExprMult =  ExprExp
+          ExprAditiv =  ExprMult
+          ExprEquals =  ExprAditiv
+          ExprLogicAnd =  ExprEquals
+          ExprLogicOr =  ExprLogicAnd
+          Expression =  ExprLogicOr
+          ExpressionList =  Expression
+              [0035, 0021] (0013,    lineEnd) {;}
+  36  	}
+              [0036, 0002] (0008,   scopeEnd) {}}
+          PrintCom =  'rwPrint' 'paramBeg' 'consString' 'commaSep' ExpressionList 'paramEnd' 'lineEnd'
+          Commands =  PrintCom
+  37  }
+              [0037, 0001] (0008,   scopeEnd) {}}
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          LoopForCom =  'rwFor' 'paramBeg' Assign Expression 'paramEnd' Scope
+          Commands =  LoopForCom
+          Commands =  Assign Commands
+          Commands =  LoopForCom Commands
+          Commands =  DeclVar Commands
+          Commands =  DeclVar Commands
+          Scope =  'scopeBeg' Commands 'scopeEnd'
+          DeclFuncMain =  'main' 'paramBeg' 'paramEnd' SpecReturnTypeVoid Scope
+          Code =  DeclFuncMain
+          Code =  DeclFunc Code
+---------- CÓDIGO ACEITO ----------
